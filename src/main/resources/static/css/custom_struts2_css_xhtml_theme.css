@@ -1,0 +1,58 @@
+.wwFormTable {width: 100%}
+.wwgrp{margin-bottom: 10px; text-align: right;}
+.wwlbl{text-align: left;}
+.wwctrl{text-align: left;}
+
+.label {font-style:italic;}
+.tdLabelTop {text-align:left; vertical-align:bottom;}
+.inputField {
+    border-style: solid; border-color: #0099ff; border-width: 1px; border-radius: 20px; 
+    padding: 10px 20px; width: 100%; box-sizing: border-box;}
+.formButton {text-align: right; margin-top: 20px;}
+
+.errorLabel {font-style:italic; color:red; }
+.errorMessage {font-weight:normal; color:black; font-size: 12px;}
+
+.checkboxLabel {}
+.required {color:red;}
+
+.tdTransferSelect {text-align:center; vertical-align:middle;}
+.tdCheckboxLabel {text-align:right; vertical-align:top;}
+.tdCheckboxInput {text-align:left; vertical-align:top;}
+.tdErrorMessage {text-align:center; vertical-align:top;}
+
+.checkboxErrorLabel {color:red; }
+.tdCheckboxErrorMessage {text-align:left; vertical-align:top;}
+
+ul.actionMessage {list-style-type: none; color: green; font-size: 15px; font-weight: bold; padding: 0;}
+
+ul.errorMessage {list-style-type: none; text-align: center; color: red; font-size: 15px; font-weight: bold; padding: 0;}
+ul.errorMessage li{margin: 10px 0 0 0;}
+
+/* MY CONFIGS*/
+.button{
+    background-color: #0099ff; color: white; padding: 5px 10px 5px 10px; vertical-align: middle;
+    text-align: center; text-decoration: none; border-radius: 20px;
+    font-size: 15px;}
+
+.customFormFooter{width: 100%; text-align: right;}
+
+.customFormButton {cursor: pointer; border-style: none; margin-top: 10px;}
+
+.customExtraFooter {display: table; margin-top: 50px; text-align: right; float: right;}
+
+#content {}
+
+.inputPanelOffLogin {
+    width: 80%;
+    position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);
+}
+
+/* On screens that are Xpx or greater*/
+@media screen and (min-width: 720px) {
+    
+    .inputPanelOffLogin {
+        width: 20%;
+        position: absolute; top: 12.5%; left: 12.5%; transform: translateX(-12.5%) translateY(-12.5%);}
+
+}

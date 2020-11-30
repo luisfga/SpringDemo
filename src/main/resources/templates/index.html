@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="#{app.name}"></title>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/custom_struts2_css_xhtml_theme.css"/>
+</head>
+<body style="background-image: url('/images/light-blue-wave-background.jpg');">
+    <div class="languageFlags">
+        <a href="/requestLocale?lang=pt_BR"><img src="/images/brazil-flag.png" class="langflag"/></a>
+        <a href="/requestLocale?lang=en"><img src="/images/usa-flag.png" class="langflag"/></a>
+    </div>
+    <div class="inputPanelOffLogin">
+        <!--<s:actionmessage escape="false"/>-->
+        <!--<s:actionerror escape="false"/>-->
+        <h1 class="wellcome" th:text="#{index.wellcome}"></h1>
+        <div class="customExtraFooter">
+            <a href="/dashboard" th:text="#{enter}" class="button"></a>
+        </div>
+    </div>
+</html>

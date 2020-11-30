@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:text="#{app.name}"></title>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/custom_struts2_css_xhtml_theme.css"/>
+</head>
+    <body style="background-image: url('/images/light-blue-wave-background.jpg');">
+        <div class="languageFlags">
+            <a href="/requestLocale?lang=pt_BR"><img src="/images/brazil-flag.png" class="langflag"/></a>
+            <a href="/requestLocale?lang=en"><img src="/images/usa-flag.png" class="langflag"/></a>
+        </div>
+
+        <div class="inputPanelOffLogin">
+            <h1 class="h1Center" th:text="#{txt.login}"></h1>
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <form th:action="@{/login}" method="post" class="wwFormTable">
+                <div><label th:text="#{txt.username}"></label><input type="text" name="username" class="inputField"/></div>
+                <div><label th:text="#{txt.password}"></label><input type="password" name="password" class="inputField"/></div>
+                <div class="customFormFooter"><input type="submit" value="Submit" th:attr="value=#{txt.login}" class="button customFormButton"/></div>
+            </form>
+            <div class="customExtraFooter">
+                <div class="plainText" th:text="#{txt.question.dont.have.account}"></div>
+                <br/>
+                <a href="/registerInput" class="button" th:text="#{txt.new.account}"/>
+                
+                <br/><br/><br/><br/>
+                <a href="/passwordRecoverInput" class="undecLink tinyText" th:text="#{txt.question.forgot.password}"/>
+            </div>
+        </div>
+
+    </body>
+</html>

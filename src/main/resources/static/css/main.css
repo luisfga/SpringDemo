@@ -1,0 +1,27 @@
+html * {font-family: Arial !important;}
+
+body {color: #0099ff;}
+
+body a {color: #0099ff;}
+
+h1.wellcome {
+    margin: 50px 0px 50px 0px;
+}
+.h1Center{text-align: center;}
+
+.languageFlags {float: right;}
+
+.langflag { width: 35px; height: 35px;}
+
+.undecLink {
+    text-decoration: none;
+    color: #0099ff;
+}
+
+.plainText {
+    color: black;
+}
+
+.tinyText {
+    font-size: 11px;
+}
