@@ -10,7 +10,7 @@
     padding: 10px 20px; width: 100%; box-sizing: border-box;}
 .formButton {text-align: right; margin-top: 20px;}
 
-.errorLabel {font-style:italic; color:red; }
+.errorLabel {font-style:italic; color:red; text-align: right; font-size: 12px;}
 .errorMessage {font-weight:normal; color:black; font-size: 12px;}
 
 .checkboxLabel {}
@@ -24,7 +24,7 @@
 .checkboxErrorLabel {color:red; }
 .tdCheckboxErrorMessage {text-align:left; vertical-align:top;}
 
-ul.actionMessage {list-style-type: none; color: green; font-size: 15px; font-weight: bold; padding: 0;}
+ul.actionMessage {list-style-type: none; text-align: center; color: green; font-size: 15px; font-weight: bold; padding: 0;}
 
 ul.errorMessage {list-style-type: none; text-align: center; color: red; font-size: 15px; font-weight: bold; padding: 0;}
 ul.errorMessage li{margin: 10px 0 0 0;}

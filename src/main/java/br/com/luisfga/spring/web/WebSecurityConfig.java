@@ -1,4 +1,4 @@
-package br.com.luisfga.spring.demo;
+package br.com.luisfga.spring.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/index", "/requestLocale").permitAll()
+				.antMatchers("/", "/index", "/requestLocale", "/registerInput", "/register").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

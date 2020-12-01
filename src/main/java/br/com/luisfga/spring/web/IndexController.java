@@ -1,4 +1,4 @@
-package br.com.luisfga.spring.demo;
+package br.com.luisfga.spring.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
