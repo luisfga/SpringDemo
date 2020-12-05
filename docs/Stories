@@ -1,0 +1,32 @@
+Author: luisfga
+
+Story 1: accessing dashboard
+    The user can access dashboard directly or trough a link on homepage
+    If the user is not authenticated, must be redirected to the login page
+
+Story 2: login
+    The user must provide email & password for authentication
+    The login page must provide links for new registration and for password recovery request
+
+Story 3: registration
+    The user must provide birthday, name, email, password and its confirmation for creating a new account
+    The system must check if the email is available
+    The system must encode the user's password before saving it to database
+    The system must set status NEW for new user's until he confirms registration
+    The system must send a confirmation email to the user with a link to the ConfirmRegistration story
+
+Story 4: confirm registration
+    After receiving the request of the sent link, the system must set user's status to OK
+
+Story 5: password recovery
+    The system must ask user for birthday and email
+    If email and birthday are correct, the system must:
+        1. Open a OperationWindow with timeout = 7 minutes
+            The OperationWindow must have an UUID
+        2. send a email with a link to password reset with the window UUID
+
+Story 6: password reset
+    After receiving the request from the sent link, the system must check validity (timeout) of the OperationWindow
+    If its in the given time the system must show screen with readonly 'email' and fields for the new password and its confirmation
+    If its out the given time, show message
+    If its with a invalid UUID, show message

@@ -31,7 +31,7 @@ public class Application {
     public DataSource hsqldbDataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-        dataSource.setUrl("jdbc:hsqldb:file:data/applicationdb");
+        dataSource.setUrl("jdbc:hsqldb:file:/appdata/spring-demo-db");
         dataSource.setUsername( "sa" );
         dataSource.setPassword( "" );
         return dataSource;
