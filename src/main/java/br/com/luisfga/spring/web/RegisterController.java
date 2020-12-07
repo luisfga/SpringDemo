@@ -32,8 +32,7 @@ public class RegisterController implements WebMvcConfigurer{
     public void customizeBinding (WebDataBinder binder) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         dateFormatter.setLenient(false);
-        binder.registerCustomEditor(Date.class, "dateOfBirth",
-                                    new CustomDateEditor(dateFormatter, true));
+        binder.registerCustomEditor(Date.class, "dateOfBirth", new CustomDateEditor(dateFormatter, true));
     }
     
     @GetMapping("/register")

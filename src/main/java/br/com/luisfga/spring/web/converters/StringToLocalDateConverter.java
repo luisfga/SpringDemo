@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.luisfga.spring.web;
+package br.com.luisfga.spring.web.converters;
 
 import java.time.LocalDate;
 import org.springframework.core.convert.converter.Converter;

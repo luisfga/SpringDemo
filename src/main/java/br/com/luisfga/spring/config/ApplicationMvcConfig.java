@@ -1,8 +1,7 @@
-package br.com.luisfga.spring.web;
+package br.com.luisfga.spring.config;
 
-import java.util.Locale;
+import br.com.luisfga.spring.web.converters.StringToLocalDateConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
@@ -11,8 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import java.util.Locale;
+
 @Configuration
-@ComponentScan("br.com.luisfga.spring.business")
 public class ApplicationMvcConfig implements WebMvcConfigurer {
 
     @Override

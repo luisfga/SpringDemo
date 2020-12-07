@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -68,7 +69,7 @@ public class AppUser implements Serializable {
             joinColumns = @JoinColumn(name = "email"), 
             inverseJoinColumns = @JoinColumn(name = "role_name")
     )
-    private List<AppRole> roles;
+    private Set<AppRole> roles;
 
     public AppUser() {
     }
@@ -145,11 +146,11 @@ public class AppUser implements Serializable {
         this.operationWindow = operationWindow;
     }
 
-    public List<AppRole> getRoles() {
+    public Set<AppRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<AppRole> roles) {
+    public void setRoles(Set<AppRole> roles) {
         this.roles = roles;
     }
     

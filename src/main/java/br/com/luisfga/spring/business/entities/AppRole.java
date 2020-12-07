@@ -1,15 +1,8 @@
 package br.com.luisfga.spring.business.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "app_role")
@@ -24,7 +17,7 @@ public class AppRole implements Serializable {
     private String roleName;
     
     @ManyToMany(mappedBy = "roles")
-    private List<AppUser> users;
+    private Set<AppUser> users;
 
     public String getRoleName() {
         return roleName;
@@ -34,12 +27,16 @@ public class AppRole implements Serializable {
         this.roleName = roleName;
     }
 
-    public List<AppUser> getUsers() {
+    public Set<AppUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<AppUser> users) {
+    public void setUsers(Set<AppUser> users) {
         this.users = users;
     }
 
+    @Override
+    public String toString() {
+        return this.roleName;
+    }
 }

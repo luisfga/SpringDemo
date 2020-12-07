@@ -6,7 +6,9 @@ import br.com.luisfga.spring.business.exceptions.EmailAlreadyTakenException;
 import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingException;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -71,15 +73,17 @@ public class RegisterUseCase {
 //        }
     }
     
-    private List<AppRole> getRolesForNewUser(){
+    private Set<AppRole> getRolesForNewUser(){
         try {
             Query findRolesForNewUser = em.createNamedQuery("AppRole.findRolesForNewUser");
             //Assumimos que um novo usuário não tem nada e sua lista de Roles está vazia.
             List<AppRole> roles = findRolesForNewUser.getResultList();
-            return roles;
+
+            return new HashSet<>(roles);
             
         } catch (NoResultException nrException) {
             //no op
+            //todo colocar uma exceção dizendo que o sistema não está configurado, pois é obrigatório que tenha ao menos uma Role.
         }
         return null;
     }

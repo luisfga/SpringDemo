@@ -5,6 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title th:text="#{app.name}"></title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico"/>
     <link rel="stylesheet" href="/css/main.css"/>
     <link rel="stylesheet" href="/css/custom_struts2_css_xhtml_theme.css"/>
 </head>
@@ -28,7 +29,7 @@
                 </ul>
                 <div>
                     <label th:text="#{txt.birthday}"></label>
-                    <input type="date" name="birthday" th:value="${registerForm.birthday}"  class="inputField"/>
+                    <input type="date" name="birthday" th:value="${registerForm.birthday}" class="inputField"/>
                     <div class="errorLabel" th:errors="*{birthday}"/>
                 </div>
                 <div>

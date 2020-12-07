@@ -10,7 +10,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 @Controller
-public class IndexController {
+public class BaseController {
     
     @GetMapping(value = {"","/","index","home"})
     public String index(){
@@ -28,14 +28,15 @@ public class IndexController {
         
         return "redirect:" + request.getHeader("Referer");
     }
-    
+
     @GetMapping("login")
     public String login(){
         return "login";
     }
-    
+
     @GetMapping("dashboard")
     public String dashboard(){
         return "dashboard";
     }
+
 }
