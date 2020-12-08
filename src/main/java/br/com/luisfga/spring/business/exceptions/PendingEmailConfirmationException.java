@@ -1,5 +1,10 @@
 package br.com.luisfga.spring.business.exceptions;
 
-public class PendingEmailConfirmationException extends Exception{
-    
+import org.springframework.security.core.AuthenticationException;
+
+public class PendingEmailConfirmationException extends AuthenticationException {
+
+    public PendingEmailConfirmationException(String msg) {
+        super(msg);
+    }
 }

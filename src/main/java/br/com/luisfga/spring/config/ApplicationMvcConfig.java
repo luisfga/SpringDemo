@@ -35,7 +35,8 @@ public class ApplicationMvcConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver(){
         SessionLocaleResolver r = new SessionLocaleResolver();
-        r.setDefaultLocale(Locale.US);
+        Locale localeBRAZIL = new Locale("pt","BR");
+        r.setDefaultLocale(localeBRAZIL);
         return r;
     }
 

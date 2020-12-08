@@ -24,7 +24,11 @@
                         <li th:text="#{validation.error.wrong.login}"></li>
                     </ul>
                 </div>
-
+                <div th:if="${param.pendingConfirmation}">
+                    <ul class="errorMessage">
+                        <li th:text="#{txt.pending.email.confirmation}"></li>
+                    </ul>
+                </div>
                 <div>
                     <label th:text="#{txt.email}"></label>
                     <input type="text" name="username" class="inputField"/>

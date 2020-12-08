@@ -1,6 +1,8 @@
 package br.com.luisfga.spring.web;
 
-import br.com.luisfga.spring.business.RegisterUseCase;
+import br.com.luisfga.spring.business.ConfirmRegistrationService;
+import br.com.luisfga.spring.business.RegisterService;
+import br.com.luisfga.spring.business.exceptions.CorruptedLinkageException;
 import br.com.luisfga.spring.business.exceptions.EmailAlreadyTakenException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +11,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +26,20 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 @Controller
 public class RegisterController implements WebMvcConfigurer{
-    
-    @Inject
-    RegisterUseCase registerUseCase;
+
+    private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+
+    @Autowired
+    private RegisterService registerService;
+
+    @Autowired
+    private ConfirmRegistrationService confirmRegistrationService;
     
     @InitBinder("user")
     public void customizeBinding (WebDataBinder binder) {
@@ -40,7 +53,20 @@ public class RegisterController implements WebMvcConfigurer{
         model.addAttribute("registerForm", new RegisterForm());
         return "register";
     }
-    
+
+    @GetMapping("/confirmRegistration")
+    public String confirmRegistration(@RequestParam String encodedUserEmail){
+        logger.debug("Bimbada no controller");
+        try {
+            confirmRegistrationService.confirmRegistration(encodedUserEmail);
+        } catch (CorruptedLinkageException e) {
+            e.printStackTrace();
+            //TODO apresentar mensagem
+        }
+
+        return "login";
+    }
+
     @PostMapping("/register")
     public String register(@Valid RegisterForm registerForm, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response){
 
@@ -59,13 +85,20 @@ public class RegisterController implements WebMvcConfigurer{
         }
         
         try {
-            registerUseCase.registerNewAppUser(
+            registerService.registerNewAppUser(
                 registerForm.getEmail(),
                 registerForm.getPassword(),
                 registerForm.getUserName(),
                 registerForm.getBirthday()
             );
-        
+
+            try {
+                registerService.enviarEmailConfirmacaoNovoUsuario(registerForm.getEmail());
+            } catch (EmailConfirmationSendingException e) {
+                //TODO enviar email em caso de falha, enviar email para o administrador
+                e.printStackTrace();
+            }
+
             request.setAttribute("successMessage", bundle.getString("success.user.registered"));
             
         } catch (EmailAlreadyTakenException emailAlreadyTakenException){

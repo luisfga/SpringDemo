@@ -1,5 +1,7 @@
 package br.com.luisfga.spring.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +16,10 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("br.com.luisfga.spring.business")
 @ComponentScan("br.com.luisfga.spring.web")
+@ComponentScan("br.com.luisfga.spring.config")
 public class Application {
+
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main (String[] args){
         SpringApplication.run(Application.class, args);
@@ -29,12 +34,12 @@ public class Application {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
 
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
+            logger.trace("Let's inspect the beans provided by Spring Boot:");
 
             String[] beanNames = ctx.getBeanDefinitionNames();
             Arrays.sort(beanNames);
             for (String beanName : beanNames) {
-                System.out.println(beanName);
+                logger.trace(beanName);
             }
 
         };

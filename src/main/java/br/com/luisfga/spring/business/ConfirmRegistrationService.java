@@ -9,13 +9,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ConfirmRegistrationUseCase {
+public class ConfirmRegistrationService {
     
     @Autowired
     public EntityManager em;
 
+    @Transactional
     public void confirmRegistration(String encodedEmail) throws CorruptedLinkageException {
         
         if (encodedEmail == null || encodedEmail.isEmpty()) {

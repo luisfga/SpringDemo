@@ -4,8 +4,11 @@ import br.com.luisfga.spring.business.entities.AppUser;
 import br.com.luisfga.spring.business.entities.AppUserOperationWindow;
 import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingException;
 import br.com.luisfga.spring.business.exceptions.WrongInfoException;
+
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -13,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PasswordRecoverUseCase {
+public class PasswordRecoverService {
     
     @Autowired
     public EntityManager em;
     
     @Autowired 
-    private MailHelper mailHelper;
+    private MailService mailService;
 
     public void prepareRecovery(String email, LocalDate birthday, String token) 
             throws WrongInfoException {
@@ -55,12 +58,12 @@ public class PasswordRecoverUseCase {
     public void enviarEmailResetSenha(String contextName, String email, String windowToken) 
             throws EmailConfirmationSendingException{
         
-//        try {
-//            
-//            mailHelper.enviarEmailResetSenha(contextName, email, windowToken);
-//        } catch (MessagingException | UnsupportedEncodingException ex) {
-//            throw new EmailConfirmationSendingException();
-//        }
+        try {
+
+            mailService.enviarEmailResetSenha(email, windowToken);
+        } catch (MessagingException | UnsupportedEncodingException ex) {
+            throw new EmailConfirmationSendingException();
+        }
     }
     
 }
