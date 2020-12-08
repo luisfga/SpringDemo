@@ -24,17 +24,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Enumeration;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
-
-	@Autowired
-	CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
