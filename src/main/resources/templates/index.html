@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html th:lang="${#locale}"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
@@ -12,8 +11,8 @@
 </head>
 <body style="background-image: url('/images/light-blue-wave-background.jpg');">
     <div class="languageFlags">
-        <a href="/requestLocale?lang=pt_BR"><img src="/images/brazil-flag.png" class="langflag"/></a>
-        <a href="/requestLocale?lang=en"><img src="/images/usa-flag.png" class="langflag"/></a>
+        <a href="?lang=pt_BR"><img src="/images/brazil-flag.png" class="langflag"/></a>
+        <a href="?lang=en_US"><img src="/images/usa-flag.png" class="langflag"/></a>
     </div>
     <div class="inputPanelOffLogin">
         <!--<s:actionmessage escape="false"/>-->

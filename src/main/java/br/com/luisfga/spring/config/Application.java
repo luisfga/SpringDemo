@@ -16,7 +16,6 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("br.com.luisfga.spring.business")
 @ComponentScan("br.com.luisfga.spring.web")
-@ComponentScan("br.com.luisfga.spring.config")
 public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);

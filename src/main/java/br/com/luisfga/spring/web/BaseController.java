@@ -23,22 +23,6 @@ public class BaseController {
         return "index";
     }
 
-    @Autowired
-    private LocaleResolver localeResolver;
-
-    @GetMapping("/requestLocale")
-    public String requestLocale(
-            @RequestParam(name="lang", required=true, defaultValue="en") String lang,
-            HttpServletRequest request, 
-            HttpServletResponse response){
-
-        logger.debug("requestLocale("+lang+")");
-        Locale locale = StringUtils.parseLocaleString(lang);
-        localeResolver.setLocale(request, response, locale);
-
-        return "redirect:" + request.getHeader("Referer");
-    }
-
     @GetMapping("login")
     public String login(){
         return "login";
