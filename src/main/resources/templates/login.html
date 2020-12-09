@@ -34,6 +34,11 @@
                         <li th:text="#{success.account.confirmed}"></li>
                     </ul>
                 </div>
+                <div th:if="${successMessage}">
+                    <ul class="actionMessage">
+                        <li th:text="${successMessage}"></li>
+                    </ul>
+                </div>
                 <div>
                     <label th:text="#{txt.email}"></label>
                     <input type="text" name="username" class="inputField"/>
@@ -54,7 +59,7 @@
                 <a href="/register" class="button" th:text="#{txt.new.account}"/>
                 
                 <br/><br/><br/><br/>
-                <a href="/passwordRecoverInput" class="undecLink tinyText" th:text="#{txt.question.forgot.password}"/>
+                <a href="/passwordRecover" class="undecLink tinyText" th:text="#{txt.question.forgot.password}"/>
             </div>
         </div>
 

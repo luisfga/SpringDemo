@@ -6,6 +6,7 @@ import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingExcepti
 import br.com.luisfga.spring.business.exceptions.WrongUserDetailsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -22,6 +23,7 @@ public class PasswordRecoverService {
     @Autowired 
     private MailService mailService;
 
+    @Transactional
     public void prepareRecovery(String email, LocalDate birthday, String token) 
             throws WrongUserDetailsException {
         
@@ -53,8 +55,7 @@ public class PasswordRecoverService {
         }
     }
     
-    public void enviarEmailResetSenha(String contextName, String email, String windowToken) 
-            throws EmailConfirmationSendingException{
+    public void enviarEmailResetSenha(String email, String windowToken) {
         
             mailService.enviarEmailResetSenha(email, windowToken);
 

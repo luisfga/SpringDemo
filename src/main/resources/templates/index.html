@@ -21,6 +21,11 @@
         <div class="customExtraFooter">
             <a href="/dashboard" th:text="#{enter}" class="button"></a>
         </div>
+        <div th:if="${successMessage}">
+            <ul class="actionMessage">
+                <li th:text="${successMessage}"></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

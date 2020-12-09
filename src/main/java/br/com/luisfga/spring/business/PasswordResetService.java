@@ -8,6 +8,7 @@ import br.com.luisfga.spring.business.exceptions.TimeHasExpiredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -36,6 +37,7 @@ public class PasswordResetService {
      * decorridos os 7 minutos do prazo.
      * @throws br.com.luisfga.spring.business.exceptions.CorruptedLinkageException - quando houver erros nos dados enviados no request
      */
+    @Transactional
     public String validateOperationWindow(String encodedUserEmail, String token) 
             throws CorruptedLinkageException, ForbidenOperationException, TimeHasExpiredException, Exception {
         
@@ -85,7 +87,8 @@ public class PasswordResetService {
         
         return decodedEmail;
     }
-    
+
+    @Transactional
     public void resetPassword(String email, String password) {
         
         try {

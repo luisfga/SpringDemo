@@ -39,12 +39,13 @@
 <!--        </rollingPolicy>-->
 <!--    </appender>-->
 
-    <root level="WARN">
+    <root level="DEBUG">
 <!--        <appender-ref ref="RollingFile" />-->
         <appender-ref ref="Console" />
     </root>
 
     <logger name="org.springframework" level="INFO" additivity="false"/>
+    <logger name="org.thymeleaf" level="WARN" additivity="false"/>
 
     <logger name="br.com.luisfga" level="DEBUG" additivity="false">
 <!--        <appender-ref ref="RollingFile" />-->

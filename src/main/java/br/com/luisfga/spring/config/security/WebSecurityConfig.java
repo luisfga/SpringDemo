@@ -51,7 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/index",
 						"/register",
 						"/login*",
-						"/confirmRegistration*")
+						"/confirmRegistration*",
+						"/passwordRecover*",
+						"/passwordReset*")
 				.permitAll()
 
 				.anyRequest()

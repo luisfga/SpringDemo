@@ -43,11 +43,11 @@ public class RegisterController implements WebMvcConfigurer{
     @Autowired
     private ConfirmRegistrationService confirmRegistrationService;
     
-    @InitBinder("user")
+    @InitBinder
     public void customizeBinding (WebDataBinder binder) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         dateFormatter.setLenient(false);
-        binder.registerCustomEditor(Date.class, "dateOfBirth", new CustomDateEditor(dateFormatter, true));
+        binder.registerCustomEditor(Date.class, "birthday", new CustomDateEditor(dateFormatter, true));
     }
     
     @GetMapping("/register")
@@ -58,7 +58,7 @@ public class RegisterController implements WebMvcConfigurer{
 
     @GetMapping("/confirmRegistration")
     public void confirmRegistration(@RequestParam String encodedUserEmail, HttpServletResponse response){
-        logger.debug("Bimbada no controller");
+        logger.debug("confirmRegistration");
         try {
             confirmRegistrationService.confirmRegistration(encodedUserEmail);
         } catch (CorruptedLinkageException e) {
