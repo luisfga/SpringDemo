@@ -4,6 +4,8 @@ import br.com.luisfga.spring.business.ConfirmRegistrationService;
 import br.com.luisfga.spring.business.RegisterService;
 import br.com.luisfga.spring.business.exceptions.CorruptedLinkageException;
 import br.com.luisfga.spring.business.exceptions.EmailAlreadyTakenException;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -55,7 +57,7 @@ public class RegisterController implements WebMvcConfigurer{
     }
 
     @GetMapping("/confirmRegistration")
-    public String confirmRegistration(@RequestParam String encodedUserEmail){
+    public void confirmRegistration(@RequestParam String encodedUserEmail, HttpServletResponse response){
         logger.debug("Bimbada no controller");
         try {
             confirmRegistrationService.confirmRegistration(encodedUserEmail);
@@ -64,7 +66,11 @@ public class RegisterController implements WebMvcConfigurer{
             //TODO apresentar mensagem
         }
 
-        return "login";
+        try {
+            response.sendRedirect("/login?confirmationSuccess=true");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @PostMapping("/register")
@@ -92,12 +98,7 @@ public class RegisterController implements WebMvcConfigurer{
                 registerForm.getBirthday()
             );
 
-            try {
-                registerService.enviarEmailConfirmacaoNovoUsuario(registerForm.getEmail());
-            } catch (EmailConfirmationSendingException e) {
-                //TODO enviar email em caso de falha, enviar email para o administrador
-                e.printStackTrace();
-            }
+            registerService.enviarEmailConfirmacaoNovoUsuario(registerForm.getEmail());
 
             request.setAttribute("successMessage", bundle.getString("success.user.registered"));
             

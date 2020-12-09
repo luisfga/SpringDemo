@@ -65,7 +65,7 @@ public class RegisterService {
 
     }
     
-    public void enviarEmailConfirmacaoNovoUsuario(String email) throws EmailConfirmationSendingException{
+    public void enviarEmailConfirmacaoNovoUsuario(String email) {
 
         mailService.enviarEmailConfirmacaoNovoUsuario(email);
 

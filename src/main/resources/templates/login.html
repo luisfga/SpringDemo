@@ -29,6 +29,11 @@
                         <li th:text="#{txt.pending.email.confirmation}"></li>
                     </ul>
                 </div>
+                <div th:if="${param.confirmationSuccess}">
+                    <ul class="actionMessage">
+                        <li th:text="#{success.account.confirmed}"></li>
+                    </ul>
+                </div>
                 <div>
                     <label th:text="#{txt.email}"></label>
                     <input type="text" name="username" class="inputField"/>

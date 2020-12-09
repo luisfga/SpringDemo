@@ -46,7 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 
 				//actions abertas pra todos
-				.antMatchers("/", "/index", "/requestLocale", "/registerInput", "/register", "/login")
+				.antMatchers(
+						"/",
+						"/index",
+						"/register",
+						"/login*",
+						"/confirmRegistration*")
 				.permitAll()
 
 				.anyRequest()
