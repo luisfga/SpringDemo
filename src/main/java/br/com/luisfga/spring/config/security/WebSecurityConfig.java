@@ -1,11 +1,11 @@
 package br.com.luisfga.spring.config.security;
 
+import br.com.luisfga.spring.business.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,6 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private MailService mailService;
+
 	@Bean
 	public UserDetailsService jpaUserDetailsService() {
 		return new CustomUserDetailsService();
@@ -31,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private CustomAuthFilter customAuthenticationFilter() throws Exception {
 		//creating filter, setting provider with detailsService and passEncoder
 		CustomAuthFilter filter = new CustomAuthFilter(new CustomAuthProvider(jpaUserDetailsService(), passwordEncoder));
-		filter.setAuthenticationFailureHandler(new CustomAuthFilterFailureHandler());
+		filter.setAuthenticationFailureHandler(new CustomAuthFilterFailureHandler(mailService));
 		return filter;
 	}
 

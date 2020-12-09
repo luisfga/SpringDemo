@@ -6,14 +6,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.servlet.ServletContext;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
-import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
 
 @Service
 public class MailService {
@@ -45,7 +45,19 @@ public class MailService {
         return (String) findUserNameByEmail.getSingleResult();
     }
 
-    public void enviarEmailResetSenha(String destEmail, String windowToken) throws MessagingException, UnsupportedEncodingException {
+    public void enviarEmailResetSenha(String destEmail, String windowToken) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                enviarEmailReset(destEmail,windowToken);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void enviarEmailReset(String destEmail, String windowToken) throws MessagingException, UnsupportedEncodingException {
 
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -72,20 +84,24 @@ public class MailService {
                 + "*Se não foi você que solicitou a redefinição de senha. Desconsidere essa mensagem.<br/><br/>"
                 + "*Este link só funcionará uma única vez. Se necessário, solicite novamente.<br/><br/>";
 
-//        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-//        mimeBodyPart.setContent(msg, "text/html; charset=UTF-8");
-
-//        Multipart multipart = new MimeMultipart();
-//        multipart.addBodyPart(mimeBodyPart);
-
         helper.setText(msg,true);
-//        message.setContent(multipart);
 
-//        Transport.send(message);
         emailSender.send(message);
     }
 
-    public void enviarEmailConfirmacaoNovoUsuario(String destEmail) throws MessagingException, UnsupportedEncodingException {
+    public void enviarEmailConfirmacaoNovoUsuario(String destEmail) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                enviarEmailConfirmacao(destEmail);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void enviarEmailConfirmacao(String destEmail) throws MessagingException, UnsupportedEncodingException {
 
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -107,22 +123,8 @@ public class MailService {
                 + serverBaseLink + servletContext.getContextPath() + registerConfirmationAction
                 + "?encodedUserEmail=" + Base64.getEncoder().encodeToString(destEmail.getBytes("UTF-8"))  + "\">Confirmar</a><br/><br/>";
 
-//        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-//        mimeBodyPart.setContent(msg, "text/html; charset=UTF-8");
-//
-//        Multipart multipart = new MimeMultipart();
-//        multipart.addBodyPart(mimeBodyPart);
-//
-//        message.setContent(multipart);
-//
-//        Transport.send(message);
-
         helper.setText(msg,true);
 
         emailSender.send(message);
-    }
-
-    private void send(String msg){
-
     }
 }

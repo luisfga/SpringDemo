@@ -4,21 +4,19 @@ import br.com.luisfga.spring.business.entities.AppRole;
 import br.com.luisfga.spring.business.entities.AppUser;
 import br.com.luisfga.spring.business.exceptions.EmailAlreadyTakenException;
 import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.UnsupportedEncodingException;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.mail.MessagingException;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterService {
@@ -68,12 +66,9 @@ public class RegisterService {
     }
     
     public void enviarEmailConfirmacaoNovoUsuario(String email) throws EmailConfirmationSendingException{
-        try {
-            mailService.enviarEmailConfirmacaoNovoUsuario(email);
 
-        } catch (MessagingException | UnsupportedEncodingException ex) {
-            throw new EmailConfirmationSendingException();
-        }
+        mailService.enviarEmailConfirmacaoNovoUsuario(email);
+
     }
     
     private Set<AppRole> getRolesForNewUser(){
