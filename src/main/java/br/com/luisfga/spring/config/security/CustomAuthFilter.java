@@ -2,6 +2,7 @@ package br.com.luisfga.spring.config.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -10,9 +11,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter {
 
-    private Logger logger = LoggerFactory.getLogger(CustomAuthenticationFilter.class);
+    private Logger logger = LoggerFactory.getLogger(CustomAuthFilter.class);
+
+    private AuthenticationProvider appSingleAuthProvider;
+
+    public CustomAuthFilter(CustomAuthProvider customAuthProvider) {
+        this.appSingleAuthProvider = customAuthProvider;
+    }
 
     @Override
     public Authentication attemptAuthentication(
@@ -45,7 +52,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(email, password);
         setDetails(request, authRequest);
 
-        return this.getAuthenticationManager().authenticate(authRequest);
+        return appSingleAuthProvider.authenticate(authRequest);
     }
 
     class AuthenticationCompositeException extends AuthenticationException {

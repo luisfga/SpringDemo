@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "app_role")
 @NamedQueries({
-        @NamedQuery(name = "AppRole.findRolesForNewUser", query = "SELECT ar FROM AppRole ar WHERE ar.roleName IN ('Normal User')"),
+        @NamedQuery(name = "AppRole.findRolesForNewUser", query = "SELECT ar FROM AppRole ar WHERE ar.roleName IN ('USER')"),
         @NamedQuery(name = "AppRole.findAllRoles", query = "SELECT ar FROM AppRole ar")
 })
 public class AppRole implements Serializable {

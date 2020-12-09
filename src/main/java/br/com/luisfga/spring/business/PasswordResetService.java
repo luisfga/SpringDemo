@@ -2,18 +2,18 @@ package br.com.luisfga.spring.business;
 
 import br.com.luisfga.spring.business.entities.AppUser;
 import br.com.luisfga.spring.business.entities.AppUserOperationWindow;
+import br.com.luisfga.spring.business.exceptions.CorruptedLinkageException;
 import br.com.luisfga.spring.business.exceptions.ForbidenOperationException;
-import br.com.luisfga.spring.business.exceptions.InvalidDataException;
 import br.com.luisfga.spring.business.exceptions.TimeHasExpiredException;
-import java.time.OffsetDateTime;
-import java.util.Base64;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import java.time.OffsetDateTime;
+import java.util.Base64;
 
 @Service
 public class PasswordResetService {
@@ -34,16 +34,16 @@ public class PasswordResetService {
      * estar faltando algum parâmetro, o que pode significar tentativa de fraudar a operação.
      * @throws br.com.luisfga.spring.business.exceptions.TimeHasExpiredException  - para quando já houverem
      * decorridos os 7 minutos do prazo.
-     * @throws br.com.luisfga.spring.business.exceptions.InvalidDataException - quando houver erros nos dados
+     * @throws br.com.luisfga.spring.business.exceptions.CorruptedLinkageException - quando houver erros nos dados enviados no request
      */
     public String validateOperationWindow(String encodedUserEmail, String token) 
-            throws InvalidDataException, ForbidenOperationException, TimeHasExpiredException, Exception {
+            throws CorruptedLinkageException, ForbidenOperationException, TimeHasExpiredException, Exception {
         
         String decodedEmail = null;
         
         try {
             if (encodedUserEmail == null || encodedUserEmail.isEmpty() || token == null || token.isEmpty()) {
-                throw new InvalidDataException();
+                throw new CorruptedLinkageException();
             }
             
             byte[] decodedUserEmailBytes = Base64.getDecoder().decode(encodedUserEmail);

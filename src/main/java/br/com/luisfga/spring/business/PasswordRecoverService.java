@@ -3,7 +3,7 @@ package br.com.luisfga.spring.business;
 import br.com.luisfga.spring.business.entities.AppUser;
 import br.com.luisfga.spring.business.entities.AppUserOperationWindow;
 import br.com.luisfga.spring.business.exceptions.EmailConfirmationSendingException;
-import br.com.luisfga.spring.business.exceptions.WrongInfoException;
+import br.com.luisfga.spring.business.exceptions.WrongUserDetailsException;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
@@ -25,7 +25,7 @@ public class PasswordRecoverService {
     private MailService mailService;
 
     public void prepareRecovery(String email, LocalDate birthday, String token) 
-            throws WrongInfoException {
+            throws WrongUserDetailsException {
         
         try {
             Query findByEmail = em.createNamedQuery("AppUser.findByEmail");
@@ -34,7 +34,7 @@ public class PasswordRecoverService {
             AppUser appUser = (AppUser) findByEmail.getSingleResult();
             
             if (!appUser.getBirthday().equals(birthday)) {
-                throw new WrongInfoException();
+                throw new WrongUserDetailsException();
             }
 
             //reaproveitamento de janela de operação. Caso já exista uma, apenas atualiza a existente ao invés de excluir e criar uma nova.
@@ -50,7 +50,7 @@ public class PasswordRecoverService {
             em.persist(operationWindow);
             
         } catch (NoResultException nrException) {
-            throw new WrongInfoException();
+            throw new WrongUserDetailsException();
             
         }
     }

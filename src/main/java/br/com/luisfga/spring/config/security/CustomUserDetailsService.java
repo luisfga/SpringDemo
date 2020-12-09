@@ -5,6 +5,7 @@ import br.com.luisfga.spring.business.entities.AppUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -33,6 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (appUser == null) {
             throw new UsernameNotFoundException("User not found");
         }
+
+        logger.debug("appUser.getRoles()");
+        appUser.getRoles().forEach(appRole -> logger.debug(appRole.toString()));
 
         return buildUserForAuthentication(appUser, getUserAuthority(appUser.getRoles()));
     }

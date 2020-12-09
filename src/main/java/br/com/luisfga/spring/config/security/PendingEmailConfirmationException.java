@@ -1,4 +1,4 @@
-package br.com.luisfga.spring.business.exceptions;
+package br.com.luisfga.spring.config.security;
 
 import org.springframework.security.core.AuthenticationException;
 
