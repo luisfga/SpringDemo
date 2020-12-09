@@ -1,4 +1,4 @@
-FROM openjdk
+FROM tomcat:jdk8-openjdk-buster
 
 RUN mkdir /luisfga
 
@@ -9,6 +9,7 @@ EXPOSE ${PORT}
 ENTRYPOINT [ "java", "-jar", "-Dserver.port=$PORT", "/luisfga/spring-demo.jar"]
 
 #TIPS
+# não esquecer de $> mvn clean package
 # Build command $> docker build -t spring-demo:dev .
 # Run command $> docker run -p 8080:8080 spring-demo:dev
 # listar containeres em execução: docker ps
