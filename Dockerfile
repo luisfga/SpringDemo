@@ -6,7 +6,7 @@ COPY target/luisfga-spring-demo-0.0.1-SNAPSHOT.jar /luisfga/spring-demo.jar
 
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "java", "-Xss512k -XX:MaxRAM=300m", "-jar", "-Dserver.port=$PORT", "/luisfga/spring-demo.jar"]
+ENTRYPOINT [ "java", "-Xss512k -XX:MaxRAM=500m", "-jar", "-Dserver.port=$PORT", "/luisfga/spring-demo.jar"]
 
 #TIPS
 # não esquecer de $> mvn clean package
@@ -16,5 +16,5 @@ ENTRYPOINT [ "java", "-Xss512k -XX:MaxRAM=300m", "-jar", "-Dserver.port=$PORT", 
 # acessar bash dentro de um container que esteja rodando: docker exec -it <containerID> /bin/bash
 
 #HEROKU tips
-#push $> heroku container:push web -a <heroku_app_name>
-#release $> heroku container:release web -a <heroku_app_name>
+#push $> heroku container:push web -a luisfga-spring-demo
+#release $> heroku container:release web -a luisfga-spring-demo
