@@ -6,7 +6,7 @@ COPY target/luisfga-spring-demo-0.0.1-SNAPSHOT.jar /luisfga/spring-demo.jar
 
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "java", "-jar", "-Dserver.port=$PORT", "/luisfga/spring-demo.jar"]
+ENTRYPOINT [ "java", "-Xss512k -XX:MaxRAM=300m", "-jar", "-Dserver.port=$PORT", "/luisfga/spring-demo.jar"]
 
 #TIPS
 # não esquecer de $> mvn clean package

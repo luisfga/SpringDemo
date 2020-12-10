@@ -39,7 +39,7 @@
 <!--        </rollingPolicy>-->
 <!--    </appender>-->
 
-    <root level="DEBUG">
+    <root level="WARN">
 <!--        <appender-ref ref="RollingFile" />-->
         <appender-ref ref="Console" />
     </root>
