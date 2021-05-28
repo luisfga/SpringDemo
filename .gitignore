@@ -4,4 +4,12 @@
 /target
 *.iml
 
+#Netbeans
 /nbactions.xml
+
+#Eclipse
+.settings
+
+#VSCode
+.classpath
+.project
